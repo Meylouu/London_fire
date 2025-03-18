@@ -6,29 +6,17 @@ import os
 import sys
 
 #### chat gpt review
-import joblib
-import pickle
+import os
 import streamlit as st
 
-file_path = "/mount/src/london_fire/src/models/_ce_PumpSecondsOnSite_OrdinalEncoder.pkl"
+st.write("🚀 Installation des dépendances...")
+os.system("pip install category_encoders")
 
-st.write("🔍 Test de chargement du fichier : ", file_path)
-
-# Test avec joblib
 try:
-    encoder_joblib = joblib.load(file_path)
-    st.write("✅ Chargement réussi avec joblib !")
-except Exception as e:
-    st.write(f"❌ Erreur avec joblib : {e}")
-
-# Test avec pickle
-try:
-    with open(file_path, "rb") as f:
-        encoder_pickle = pickle.load(f)
-    st.write("✅ Chargement réussi avec pickle !")
-except Exception as e:
-    st.write(f"❌ Erreur avec pickle : {e}")
-
+    import category_encoders
+    st.write("✅ category_encoders installé !")
+except ModuleNotFoundError:
+    st.write("❌ category_encoders toujours manquant !")
 
 
 # Obtenir le chemin absolu du répertoire parent
