@@ -166,70 +166,50 @@ def change_time(time, refresh=True):
         st.rerun()
 
 
-st.write("Exemples ")
+st.write("## Exemples d'entrées")
 
-rowButtons = st.columns([1, 1])
-c11 = rowButtons[0].container(height=220)
-c12 = rowButtons[1].container(height=220)
+# Exemples d'incidents
+with st.expander("Exemples d'incidents"):
+    col1, col2 = st.columns(2)
+    if col1.button("Incendie de végétation près d'une voie ferrée"):
+        change_incident("RAILWAY TRACKSIDE VEGETATION", "PRIMARY FIRE")
+    if col2.button("Feu de cheminée dans une maison individuelle"):
+        change_incident("HOUSE - SINGLE OCCUPANCY", "CHIMNEY FIRE")
+    if col1.button("Fuite de SST-LIFT dans un stockage de déchets en vrac"):
+        change_incident("BULK WASTE STORAGE", "SST-LIFT RELEASE")
+    if col2.button("Alarme dans un stockage de déchets en vrac"):
+        change_incident("BULK WASTE STORAGE", "ALARM")
+    if col1.button("Alarme dans un atelier de réparation de véhicules"):
+        change_incident("VEHICLE REPAIR WORKSHOP", "ALARM")
 
-if c11.button("1 RAILWAY TRACKSIDE VEGETATION / PRIMARY FIRE "):
-    change_incident("RAILWAY TRACKSIDE VEGETATION", "PRIMARY FIRE")
-if c12.button("2 HOUSE - SINGLE OCCUPANCY / CHIMNEY FIRE "):
-    change_incident("HOUSE - SINGLE OCCUPANCY", "CHIMNEY FIRE")
-if c11.button("3 BULK WASTE STORAGE / SST-LIFT RELEASE"):
-    change_incident("BULK WASTE STORAGE", "SST-LIFT RELEASE")
-if c12.button("4  BULK WASTE STORAGE / ALARM "):
-    change_incident("BULK WASTE STORAGE", "ALARM")
-if c11.button("5 VEHICLE REPAIR WORKSHOP / ALARM"):
-    change_incident("VEHICLE REPAIR WORKSHOP", "ALARM")
+# Exemples de codes postaux
+with st.expander("Exemples de codes postaux"):
+    col1, col2 = st.columns(2)
+    if col1.button("BR1 (Bromley)"):
+        change_postcode_district("BR1")
+    if col2.button("CR5 (Coulsdon)"):
+        change_postcode_district("CR5")
+    if col1.button("BR8 (Swanley)"):
+        change_postcode_district("BR8")
 
-rowButtons2 = st.columns([1, 1, 1, 1])
-c21 = rowButtons2[0].container(height=130)
-c22 = rowButtons2[1].container(height=130)
-c23 = rowButtons2[2].container(height=130)
-c24 = rowButtons2[3].container(height=130)
+# Exemples de dates
+with st.expander("Exemples de dates"):
+    col1, col2 = st.columns(2)
+    if col1.button("Samedi 22 février 2025"):
+        change_date(date(2025, 2, 22))
+    if col2.button("Aujourd'hui (18 février 2025)"):
+        change_date(date(2025, 2, 18))
 
-if c21.button("BR1"):
-    change_postcode_district("BR1")
-if c22.button("CR5"):
-    change_postcode_district("CR5")
-
-if c23.button("Samedi"):
-    change_date(date(2025, 2, 22))
-if c24.button("Aujourd'hui"):
-    change_date(date(2025, 2, 18))
-
-if c21.button("0h30"):
-    change_time(datetime(2025, 2, 22, 0, 30))
-if c22.button("7h30"):
-    change_time(datetime(2025, 2, 22, 7, 30))
-
-if c23.button("BR8 à 17h30"):
-    change_time(datetime(2025, 2, 22, 17, 30), False)
-    change_postcode_district("BR8")
-
-
-def format_seconds(seconds):
-    """Formatage intelligent des secondes
-
-    Args:
-        seconds (_type_): Temps en secondes à formater
-
-    Returns:
-        _type_: un temps formaté
-    """
-    # si moins d'une minute, retoune le temps en secondes
-    if seconds < 60:
-        return f"{round(seconds)} sec"
-    # converti en minutes
-    minutes, sec = divmod(seconds, 60)
-    # si moins d'une heure, retourne le temps en minutes et secondes
-    if minutes < 60:
-        return f"{round(minutes)} min {round(sec)} sec"
-    # si plus d'une heure, retourne le temps en heures, minutes et secondes
-    hours, minutes = divmod(minutes, 60)
-    return f"{round(hours)} h {round(minutes)} min {round(sec)} sec"
-
+# Exemples d'heures
+with st.expander("Exemples d'heures"):
+    col1, col2, col3 = st.columns(3)
+    if col1.button("00h30"):
+        change_time(datetime(2025, 2, 22, 0, 30))
+    if col2.button("07h30"):
+        change_time(datetime(2025, 2, 22, 7, 30))
+    if col3.button("17h30 (BR8)"):
+        change_time(datetime(2025, 2, 22, 17, 30), False)
+        change_postcode_district("BR8")
 
 # Prédiction
 st.header("Les prédictions de Zoltar")
