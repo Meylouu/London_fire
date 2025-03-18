@@ -5,19 +5,6 @@ from datetime import datetime, date
 import os
 import sys
 
-#### chat gpt review
-import os
-import streamlit as st
-
-st.write("🚀 Installation des dépendances...")
-os.system("pip install category_encoders")
-
-try:
-    import category_encoders
-    st.write("✅ category_encoders installé !")
-except ModuleNotFoundError:
-    st.write("❌ category_encoders toujours manquant !")
-
 
 # Obtenir le chemin absolu du répertoire parent
 dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
