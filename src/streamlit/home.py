@@ -6,17 +6,10 @@ import os
 import sys
 
 #### chat gpt review
-import os
+import joblib
+import streamlit as st
 
-model_path = "/mount/src/london_fire/src/models/_ce_PumpSecondsOnSite_OrdinalEncoder.pkl"
-
-if os.path.exists(model_path):
-    st.write("✅ Fichier trouvé :", model_path)
-else:
-    st.write("❌ Fichier NON trouvé :", model_path)
-
-# Lister les fichiers du dossier models
-st.write("📂 Contenu du dossier models :", os.listdir("/mount/src/london_fire/src/models/"))
+st.write("🔹 Version de joblib :", joblib.__version__)
 
 
 # Obtenir le chemin absolu du répertoire parent
