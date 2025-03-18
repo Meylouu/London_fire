@@ -7,9 +7,28 @@ import sys
 
 #### chat gpt review
 import joblib
+import pickle
 import streamlit as st
 
-st.write("🔹 Version de joblib :", joblib.__version__)
+file_path = "/mount/src/london_fire/src/models/_ce_PumpSecondsOnSite_OrdinalEncoder.pkl"
+
+st.write("🔍 Test de chargement du fichier : ", file_path)
+
+# Test avec joblib
+try:
+    encoder_joblib = joblib.load(file_path)
+    st.write("✅ Chargement réussi avec joblib !")
+except Exception as e:
+    st.write(f"❌ Erreur avec joblib : {e}")
+
+# Test avec pickle
+try:
+    with open(file_path, "rb") as f:
+        encoder_pickle = pickle.load(f)
+    st.write("✅ Chargement réussi avec pickle !")
+except Exception as e:
+    st.write(f"❌ Erreur avec pickle : {e}")
+
 
 
 # Obtenir le chemin absolu du répertoire parent
