@@ -21,13 +21,17 @@ jobs:
           git config --list
           git remote -v
 
-      - name: Pull latest changes
-        run: git pull origin main
-
-      - name: Make an empty commit to keep the app alive
+      - name: Configure Git user
         run: |
           git config --global user.email "amelie_bua@hotmail.fr"
           git config --global user.name "Meylouu"
+
+      - name: Pull latest changes with rebase
+        run: |
+          git pull --rebase origin main
+
+      - name: Make an empty commit to keep the app alive
+        run: |
           git commit --allow-empty -m "Keep Streamlit App Alive"
           git push
         env:
