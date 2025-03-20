@@ -5,6 +5,9 @@ from datetime import datetime, date
 import os
 import sys
 
+def format_seconds(value):
+    # Exemple de transformation des secondes en hh:mm:ss
+    return f"{int(value) // 3600:02}:{(int(value) % 3600) // 60:02}:{int(value) % 60:02}"
 
 # Obtenir le chemin absolu du répertoire parent
 dir_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
