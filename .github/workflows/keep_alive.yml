@@ -1,5 +1,8 @@
 name: Keep Streamlit App Alive
 
+permissions:
+  contents: write
+  
 on:
   schedule:
     - cron: '0 * * * *' # Vérifie toutes les heures
@@ -12,6 +15,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Debug Git configuration
+        run: |
+          git config --list
+          git remote -v
 
       - name: Make an empty commit to keep the app alive
         run: |
@@ -19,3 +27,5 @@ jobs:
           git config --global user.name "Meylouu"
           git commit --allow-empty -m "Keep Streamlit App Alive"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
